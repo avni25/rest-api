@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Aircraft = require("../models/aircraft-sch");
-
+const aircrafts = require("../aircrafts");
 
 // get all aircarfts
 router.get("/", async(req, res)=>{
@@ -10,6 +10,17 @@ router.get("/", async(req, res)=>{
         if(!aircrafts) throw Error("No item received!!");
         res.status(200).json(aircrafts);
         console.log(aircrafts);
+    }catch(err){
+        res.status(400).json({msg:`${err}`});
+    }
+});
+
+// get one aircraft
+router.get("/:id", async (req, res)=>{
+    try{
+        const aircraft = await Aircraft.findById(req.params.id) 
+        if(!aircraft) throw Error("No item received!!");
+        res.status(200).json(aircraft);
     }catch(err){
         res.status(400).json({msg:`${err}`});
     }
@@ -28,6 +39,14 @@ router.post("/", async (req, res)=>{
     }
 });
 
-
+router.post("/all", async (req, res)=>{
+    Aircraft.collection.insertMany(aircrafts,(err,docs)=>{
+        if (err){ 
+            return console.error(err);
+        } else {
+          console.log("Multiple documents inserted to Collection");
+        }
+    })
+});
 
 module.exports = router;

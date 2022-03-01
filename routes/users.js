@@ -8,6 +8,7 @@ router.get("/", async (req, res)=>{
         const users = await User.find(); 
         if(!users) throw Error("No item received!!");
         res.status(200).json(users);
+        console.log(users);
     }catch(err){
         res.status(400).json({msg:`${err}`});
     }

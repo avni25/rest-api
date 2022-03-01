@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Aircraft = require("../models/aircraft-sch");
-const aircrafts = require("../aircrafts");
 
 // get all aircarfts
 router.get("/", async(req, res)=>{
@@ -26,7 +25,7 @@ router.get("/:id", async (req, res)=>{
     }
 });
 
-// create user
+// create aircraft
 router.post("/", async (req, res)=>{
     // console.log(req.body);
     const newAircraft = new Aircraft(req.body);
@@ -39,14 +38,14 @@ router.post("/", async (req, res)=>{
     }
 });
 
-router.post("/all", async (req, res)=>{
-    Aircraft.collection.insertMany(aircrafts,(err,docs)=>{
-        if (err){ 
-            return console.error(err);
-        } else {
-          console.log("Multiple documents inserted to Collection");
-        }
-    })
-});
+// router.post("/all", async (req, res)=>{
+//     Aircraft.collection.insertMany(aircrafts,(err,docs)=>{
+//         if (err){ 
+//             return console.error(err);
+//         } else {
+//           console.log("Multiple documents inserted to Collection");
+//         }
+//     })
+// });
 
 module.exports = router;

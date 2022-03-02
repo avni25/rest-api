@@ -12,7 +12,8 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({ extended: true }));
+// var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 // connect to MongoDB
 mongoose.connect(MONGO_URI, {useNewUrlParser: true})
@@ -23,18 +24,11 @@ mongoose.connect(MONGO_URI, {useNewUrlParser: true})
 app.use("/aircrafts", aircraftRoutes);
 
 app.get("/", (req, res)=>{
-    console.log(req);
     res.sendFile(path.join(__dirname, '/index.html'));
 })
 
 
-app.post('/', urlencodedParser, function (req, res) {
-    response = {
-       type: req.body.body_type
-    };
-    console.log(response);
-    res.end(JSON.stringify(response));
- })
+
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);

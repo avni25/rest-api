@@ -11,16 +11,13 @@ router.get("/", async(req, res)=>{
     var query = {};
     
     if(req.query){
-        console.log(req.query.wing_span.gt);
-        query = req.query;
+        query = req.query;                
     }    
     try{
-        const aircrafts = await (await Aircraft.find(query)).forEach((item)=>{
-            item.wing_span = parseInt(item.wing_span);
-        }); 
+        const aircrafts = await (await Aircraft.find(query));
         if(!aircrafts) throw Error("No item received!!");
         res.status(200).json(aircrafts);
-        // console.log(aircrafts);
+        console.log(aircrafts);
     }catch(err){
         res.status(400).json({msg:`${err}`});
     }

@@ -1,14 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const Aircraft = require("../models/aircraft-sch");
+// const input = document.getElementById("myinput");
+
 
 // get all aircarfts
 router.get("/", async(req, res)=>{
+    console.log(req.query);
+    // console.log(input.textContent);
+    var query = {};
+    if(req.query){
+        query = req.query;
+    }    
     try{
-        const aircrafts = await Aircraft.find(); 
+        const aircrafts = await Aircraft.find(query); 
         if(!aircrafts) throw Error("No item received!!");
         res.status(200).json(aircrafts);
-        console.log(aircrafts);
+        // console.log(aircrafts);
     }catch(err){
         res.status(400).json({msg:`${err}`});
     }
@@ -17,13 +25,16 @@ router.get("/", async(req, res)=>{
 // get one aircraft
 router.get("/:id", async (req, res)=>{
     try{
-        const aircraft = await Aircraft.findById(req.params.id) 
+        const aircraft = await Aircraft.findById(req.params.id);
         if(!aircraft) throw Error("No item received!!");
         res.status(200).json(aircraft);
     }catch(err){
         res.status(400).json({msg:`${err}`});
     }
 });
+
+
+
 
 // create aircraft
 router.post("/", async (req, res)=>{
@@ -47,5 +58,6 @@ router.post("/", async (req, res)=>{
 //         }
 //     })
 // });
+
 
 module.exports = router;

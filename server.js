@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const { MONGO_URI } = require("./config");
+// const { MONGO_URI } = require("./config");
 const aircraftRoutes = require("./routes/aircrafts-route");
 const path = require('path');
 
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
 // connect to MongoDB
-mongoose.connect(MONGO_URI, {useNewUrlParser: true})
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
     .then(()=> console.log("MongoDB connected!!"))
     .catch((err)=> console.log(err));
 

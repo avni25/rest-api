@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
     <title>Document</title>
 </head>
 <body>
-    <p><a href="http://localhost:3000/aircrafts"> All Aircrafts</a></p>
-    <p><a href="http://localhost:3000/aircrafts?type=B753"> B753</a></p>
-    <p><a href="http://localhost:3000/aircrafts?wing_span[$gt]=40"> wing span >= 40</a></p>
-    <input type="text" id="mytext" />
-    <button id="mybtn" >Click</button>
-    <script>
-        console.log("qwe");
-        const mytext = document.getElementById("mytext");
-        const button = document.getElementById("mybtn");
-
-        button.addEventListener("click", ()=>{
-            console.log(mytext.value);
-            window.location = `http://localhost:3000/aircrafts?type=${mytext.value}`
-        });
-        
-
-
-
-    </script>
+    <div id="main-container">
+        <p><a href="aircrafts"> All Aircrafts</a></p>
+        <p><a href="aircrafts?type=B753"> B753</a></p>
+        <p><a href="aircrafts?wing_span[$gt]=40"> wing span >= 40</a></p>
+        <form action="aircrafts" method="get">
+            <label for="type">Body Type</label>
+            <input type="text" name="type" style="text-transform:uppercase" oninput="this.value = this.value.toUpperCase()"/>            
+            <input type="submit" />
+        </form>
+        <form action="aircrafts" method="get">
+            <label for="type">Wing span >=</label>
+            <input type="text" name="wing_span[$gt]" style="text-transform:uppercase" oninput="this.value = this.value.toUpperCase()"/>            
+            <input type="submit" />
+        </form>
+    </div>
+    
 </body>
 </html>

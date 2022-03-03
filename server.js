@@ -3,17 +3,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const { MONGO_URI } = require("./config");
-const aircrafts = require("./aircrafts");
-const userRoutes = require("./routes/users");
 const aircraftRoutes = require("./routes/aircrafts-route");
-const res = require("express/lib/response");
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// var urlencodedParser = bodyParser.urlencoded({ extended: true });
+app.use(express.static(path.join(__dirname)));
 
 // connect to MongoDB
 mongoose.connect(MONGO_URI, {useNewUrlParser: true})

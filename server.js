@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-// const { MONGO_URI } = require("./config");
 const aircraftRoutes = require("./routes/aircrafts-route");
 const path = require('path');
 

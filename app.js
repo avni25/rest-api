@@ -5,7 +5,10 @@ const bodyParser = require("body-parser");
 const aircraftRoutes = require("./routes/aircrafts-route");
 const path = require('path');
 
-const PORT = process.env.PORT || 3000;
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 const HOST = process.env.DATABASE_URL || '0.0.0.0';
 
 const app = express();
@@ -28,8 +31,8 @@ app.get("/", (req, res)=>{
 
 
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on port ${PORT}`);
+app.listen(port, ()=>{
+    console.log(`Server is running on port ${port}`);
 });
 
 
